@@ -54,14 +54,12 @@
 
       <div style="position:relative">
         <div class="tips">
-          <span>{{ $t('login.username') }} : admin</span>
-          <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
+          <span></span>
+          <span></span>
         </div>
         <div class="tips">
-          <span style="margin-right:18px;">
-            {{ $t('login.username') }} : editor
-          </span>
-          <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
+          <span style="margin-right:18px;"></span>
+          <span></span>
         </div>
 
         <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
@@ -90,24 +88,22 @@ export default {
   components: { LangSelect, SocialSign },
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+      //if (!validUsername(value)) {  判断用户是否存在
+      if (!value) {
+        callback(new Error('用户名不能为空'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error('密码不能小于6位数'))
       } else {
         callback()
       }
     }
     return {
-      loginForm: {
-        username: 'admin',
-        password: '111111'
-      },
+      loginForm: {},
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
